@@ -19,7 +19,7 @@ termux_step_make() {
 	export RUSTC_BOOTSTRAP=1
 	termux_setup_rust
 	termux_setup_nodejs
-	export RUSTFLAGS="--cfg tokio_unstable -Z tls-model=initial-exec -Z plt=no"
+	export RUSTFLAGS="--cfg tokio_unstable -Z plt=no"
 	export CFLAGS="$CFLAGS -fno-emulated-tls"
 	export CXXFLAGS="$CXXFLAGS -fno-emulated-tls"
 	local ENV_PREFIX=$(echo "$CARGO_TARGET_NAME" | tr '[:lower:]-' '[:upper:]_')
