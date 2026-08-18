@@ -20,8 +20,8 @@ termux_step_make() {
 	termux_setup_rust
 	termux_setup_nodejs
 	export RUSTFLAGS="--cfg tokio_unstable -Z plt=no"
-	export CFLAGS="$CFLAGS -fno-emulated-tls"
-	export CXXFLAGS="$CXXFLAGS -fno-emulated-tls"
+	export CFLAGS="$CFLAGS -fno-emulated-tls -ftls-model=global-dynamic"
+	export CXXFLAGS="$CXXFLAGS -fno-emulated-tls -ftls-model=global-dynamic"
 	local ENV_PREFIX=$(echo "$CARGO_TARGET_NAME" | tr '[:lower:]-' '[:upper:]_')
 	if [ "$TERMUX_ARCH" == "aarch64" ]; then
 		export RUSTFLAGS+=" -Zshare-generics=y -Csymbol-mangling-version=v0"
