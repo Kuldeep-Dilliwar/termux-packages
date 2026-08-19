@@ -98,19 +98,6 @@ index 35293d8a..2ea9913d 100644
  
  #[napi(ts_return_type = "Promise<{ __napiType: \"Lockfile\" } | null>")]
 
-diff --git a/packages/next/src/build/swc/index.ts b/packages/next/src/build/swc/index.ts
-index 3fa7bbef..8cc229eb 100644
---- a/packages/next/src/build/swc/index.ts
-+++ b/packages/next/src/build/swc/index.ts
-@@ -150,7 +150,7 @@ function checkVersionMismatch(pkgData: any) {
- // we'll not include native bindings for these platform at all.
- const knownDefaultWasmFallbackTriples = [
-   'x86_64-unknown-freebsd',
--  'aarch64-linux-android',
-+  //'aarch64-linux-android',
-   'arm-linux-androideabi',
-   'armv7-unknown-linux-gnueabihf',
-   'i686-pc-windows-msvc',
 diff --git a/turbopack/crates/turbo-tasks-fetch/Cargo.toml b/turbopack/crates/turbo-tasks-fetch/Cargo.toml
 index 6cf005e9..008af260 100644
 --- a/turbopack/crates/turbo-tasks-fetch/Cargo.toml
