@@ -97,20 +97,7 @@ index 35293d8a..2ea9913d 100644
  }
  
  #[napi(ts_return_type = "Promise<{ __napiType: \"Lockfile\" } | null>")]
-diff --git a/packages/next-swc/package.json b/packages/next-swc/package.json
-index 40c44c03..b02aa459 100644
---- a/packages/next-swc/package.json
-+++ b/packages/next-swc/package.json
-@@ -32,7 +32,8 @@
-         "x86_64-unknown-linux-musl",
-         "aarch64-unknown-linux-musl",
-         "aarch64-pc-windows-msvc",
--        "wasm32-wasip1-threads"
-+        "wasm32-wasip1-threads",
-+        "aarch64-linux-android"
-       ]
-     }
-   },
+
 diff --git a/packages/next/src/build/swc/index.ts b/packages/next/src/build/swc/index.ts
 index 3fa7bbef..8cc229eb 100644
 --- a/packages/next/src/build/swc/index.ts
