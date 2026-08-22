@@ -9,6 +9,7 @@ TERMUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
 TERMUX_PKG_EXCLUDED_ARCHES="arm, i686"
 TERMUX_PKG_UPDATE_TAG_TYPE=latest-release-tag
+TERMUX_PKG_API_LEVEL=29
 
 termux_step_pre_configure() {
 	export ANDROID_NDK_LATEST_HOME="${TERMUX_STANDALONE_TOOLCHAIN}"
@@ -22,7 +23,7 @@ termux_step_make() {
 	export CFLAGS="$CFLAGS -fno-emulated-tls -ftls-model=global-dynamic"
 	export CXXFLAGS="$CXXFLAGS -fno-emulated-tls -ftls-model=global-dynamic"
 	local ENV_PREFIX=$(echo "$CARGO_TARGET_NAME" | tr '[:lower:]-' '[:upper:]_')
-	if [ "$TERMUX_ARCH" == "aarch64" ] || [ "$TERMUX_ARCH" == "x86_64" ]; then
+	if [ "$TERMUX_ARCH" == "aarch64" ]; then
 		export RUSTFLAGS+=" -Zshare-generics=y -Csymbol-mangling-version=v0"
 		npm i -g "@napi-rs/cli@2.18.4" # Hardcoded NAPI_CLI_VERSION from workflow
 	else
