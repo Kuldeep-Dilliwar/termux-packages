@@ -173,38 +173,6 @@ index 2b724056..39b1906c 100644
 +                    .with_no_client_auth();
 +                builder = builder.use_preconfigured_tls(tls_config);
 +            }
-+            // --- BRANCH B: REAL APP MODE (Add, don't Replace) ---
-+            else if let Ok(p) = env_var {
-+                // We are NOT in Termux, but we have a custom cert.
-+                // We want to KEEP the Android System certs and ADD this one.
-+                //println!("[Turbopack] Custom cert env var detected (Android App mode).");
-+                
-+                if let Ok(pem_bytes) = std::fs::read(&p) {
-+                    let content = String::from_utf8_lossy(&pem_bytes);
-+                    // ... (Reuse the same parsing logic) ...
-+                    let header = "-----BEGIN CERTIFICATE-----";
-+                    let footer = "-----END CERTIFICATE-----";
-+                    let mut current_idx = 0;
-+                    while let Some(start_offset) = content[current_idx..].find(header) {
-+                        let start = current_idx + start_offset + header.len();
-+                        if let Some(end_offset) = content[start..].find(footer) {
-+                            let end = start + end_offset;
-+                            let base64_str = content[start..end].lines().map(|l| l.trim()).collect::<String>();
-+                            
-+                            if let Ok(der_bytes) = simple_base64_decode(&base64_str) {
-+                                // ADDITION: We use reqwest's API to add to the existing system list.
-+                                if let Ok(cert) = reqwest::Certificate::from_der(&der_bytes) {
-+                                    builder = builder.add_root_certificate(cert);
-+                                }
-+                            }
-+                            current_idx = end + footer.len();
-+                        } else { break; }
-+                    }
-+                }
-+            }
-+            // --- BRANCH C: STANDARD MODE ---
-+            // No Termux, No Env Var. Do nothing. 
-+            // reqwest will automatically use Android System Certs via JNI.
 +        }
          builder.build()
      }
