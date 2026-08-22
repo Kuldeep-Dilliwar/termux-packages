@@ -124,7 +124,7 @@ index 2b724056..39b1906c 100644
          {
              use std::sync::Once;
              static ONCE: Once = Once::new();
-@@ -109,6 +109,84 @@ impl FetchClientConfig {
+@@ -109,6 +109,52 @@ impl FetchClientConfig {
                  },
              ))
          }
@@ -177,7 +177,7 @@ index 2b724056..39b1906c 100644
          builder.build()
      }
  }
-@@ -353,6 +431,32 @@ fn parse_cache_control(headers: &reqwest::header::HeaderMap) -> Option<u64> {
+@@ -353,6 +399,32 @@ fn parse_cache_control(headers: &reqwest::header::HeaderMap) -> Option<u64> {
      max_age
  }
  
