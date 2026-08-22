@@ -7,7 +7,6 @@ TERMUX_PKG_SRCURL=https://github.com/vercel/next.js/archive/refs/tags/v${TERMUX_
 TERMUX_PKG_SHA256=b14fd7648da2039295796d0ad1aedc5471fddd54659e62c98e2de313ad2de6d1
 TERMUX_PKG_BUILD_IN_SRC=true
 TERMUX_PKG_AUTO_UPDATE=true
-TERMUX_PKG_API_LEVEL=29
 TERMUX_PKG_EXCLUDED_ARCHES="arm, i686"
 TERMUX_PKG_UPDATE_TAG_TYPE=latest-release-tag
 
@@ -23,7 +22,7 @@ termux_step_make() {
 	export CFLAGS="$CFLAGS -fno-emulated-tls -ftls-model=global-dynamic"
 	export CXXFLAGS="$CXXFLAGS -fno-emulated-tls -ftls-model=global-dynamic"
 	local ENV_PREFIX=$(echo "$CARGO_TARGET_NAME" | tr '[:lower:]-' '[:upper:]_')
-	if [ "$TERMUX_ARCH" == "aarch64" ]; then
+	if [ "$TERMUX_ARCH" == "aarch64" ] || [ "$TERMUX_ARCH" == "x86_64" ]; then
 		export RUSTFLAGS+=" -Zshare-generics=y -Csymbol-mangling-version=v0"
 		npm i -g "@napi-rs/cli@2.18.4" # Hardcoded NAPI_CLI_VERSION from workflow
 	else
